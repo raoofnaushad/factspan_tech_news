@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Factspan Blogs</title>
+        <link rel="icon" href="../static/icons/factspan_logo.png" type="image/x-icon"/>
+        <link rel="stylesheet" href="../static/css/style.css">
+    </head>
+<body id="theBody">
+    <div class="posts">
+        <div class="post">
+            <div class="post-container">
+                    <h1 class="headline-of-post">{{news["article"]}} <p class="evbex-originals-txt"> | Factspan Originals</p></h1>
+                <div class="image-and-content">
+                    <div class="total-content">                        
+                        <!-- <p class="contents"> -->
+                        <!-- <img src='{{news["image"]}}' alt="image of the post" class="post-img"> -->
+                        <br>
+                        {% for text in news["texts"] %}
+                        <br>
+                        {{text}}
+                        <br>
+                        {% endfor %}
+
+                        <p class="link" hidden>
+                            {{link}}
+                        </p>
+                        <p class="source-date">{{news["date"]}}</p>
+                        <p class="source-date">{{news["hashtags"][0]}}</p>
+                        <p class="source-date">Category: {{news["category"]}}</p>
+                    </div>
+                </div>
+                <div class="orginals"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="dark-overlay"></div>
+    <div class="subscribe-popup">
+        <div class="popup-container">
+            <div class="pop-title">
+                <h2 class="main-title">Subscribe to our Newsletter!!</h2>
+                <h3 class="sub-title">Get notified with fresh news</h3>
+            </div>
+            <form action="/subscribe" method="post">
+                <div class="popup-body">
+                    <div class="input-box">
+                        <p class="box-title">Name</p>
+                        <input type="text" name="name" class="box name" required>
+                    </div>
+                    <div class="input-box">
+                        <p class="box-title">Mail Id</p>
+                        <input type="text" name="mail" class="box mail" placeholder="eg : xyz@factpsan.com" required>
+                        <!-- <input type="email" class="box" pattern=".+@globex\.com" required> -->
+                    </div>
+                    <p class="box-title error" style="font-weight:600;">*Invalid Mail Id</p>
+                </div>
+                <div class="popup-actions">
+                    <button class="cancel-btn subscribe" onclick="hideSubscribePopup()">Cancel</button>
+                    <button class="subscribe subscribe-on-popup">Subscribe</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <p class="advar" hidden>{{ads}}</p>
+
+    {% if subs==1 %}
+    <div class="success-message">
+        <div class="left-part">
+            <img src="../static/icons/success.svg" alt="success" class="success">
+        </div>
+        <div class="right-part">
+            <p class="success-title">Success!!</p>
+            <p class="success-content">Your subscription has been added. You will be receiving our daily updates! Check it out!!</p>
+            <button style="border: none; background: transparent;" onclick="closeSuccessNoti()"><img src="../static/icons/close-btn.svg" alt="X" class="success-close-btn"></button>
+        </div>
+    </div>
+    {% elif subs==-1 %}
+    <div class="success-message">
+        <div class="left-part">
+            <img src="../static/icons/success.svg" alt="success" class="success">
+        </div>
+        <div class="right-part">
+            <p class="success-title">Success!!</p>
+            <p class="success-content">Your subscription has been deleted. You will not be receiving our daily updates!</p>
+            <button style="border: none; background: transparent;" onclick="closeSuccessNoti()"><img src="../static/icons/close-btn.svg" alt="X" class="success-close-btn"></button>
+        </div>
+    </div>
+    {% endif %}
+    <div class="unsubscribe-popup subscribe-popup">
+        <div class="popup-container">
+            <div class="pop-title">
+                <h2 class="main-title">Unsubscribe Newsletter</h2>
+                <h3 class="sub-title">You can subscribe again anytime later!!</h3>
+            </div>
+            <form action="/unsubscribe" method="post">
+                <div class="popup-body">
+                    <div class="input-box">
+                        <p class="box-title">Enter your subscribed Mail Id</p>
+                        <input type="text" name="mail" class="box mail" placeholder="eg : xyz@factpsan.com" required>
+                        <!-- <input type="email" class="box" pattern=".+@globex\.com" required> -->
+                    </div>
+                    <p class="box-title error" style="font-weight:600;">*Invalid Mail Id</p>
+                </div>
+                <div class="popup-actions">
+                    <button type="button" class="cancel-btn subscribe" onclick="hideUnsubscribePopup()">Cancel</button>
+                    <button type="submit" class="subscribe subscribe-on-popup">Unsubscribe</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="footer">
+        <p style="margin-bottom:10px;">Want to unsubscribe from our newsletter? <a href="#" onclick="displayUnsubscribePopup()"><u>Click here</u></a></p>
+        <p>© 2023 Factspan Analytics Limited. All rights reserved.</p>
+        <p><a href="">Privacy Policy</a> | <a href="">Terms & Conditions</a></p>
+        <button class="back-to-top" onclick="goToTop()"><img src="../static/icons/up-arrow.svg" alt="" class="up-arrow"></button>
+    </div>
+    <script src="../static/js/script .js"></script>
+</body>
+</html>
